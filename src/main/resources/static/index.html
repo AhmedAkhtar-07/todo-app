@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My To-Do App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="app-container">
+
+        <header class="app-header">
+            <h1 class="app-title">My Tasks</h1>
+            <!-- Stats bar showing counts -->
+            <div class="stats-bar">
+                <span id="total-count">0 total</span>
+                <span class="dot">·</span>
+                <span id="done-count">0 done</span>
+                <span class="dot">·</span>
+                <span id="pending-count">0 pending</span>
+            </div>
+        </header>
+
+        <!-- ── Add Task Form ─────────────────────────────────────── -->
+        <div class="add-task-card">
+            <input
+                type="text"
+                id="task-input"
+                class="task-input"
+                placeholder="What needs to be done?"
+                maxlength="100"
+            />
+            <!-- Priority selector -->
+            <select id="priority-select" class="priority-select">
+                <option value="LOW">🟢 Low</option>
+                <option value="MEDIUM" selected>🟡 Medium</option>
+                <option value="HIGH">🔴 High</option>
+            </select>
+            <!-- Add button triggers addTask() in app.js -->
+            <button class="add-btn" onclick="addTask()">Add Task</button>
+        </div>
+
+        <!-- ── Filter Buttons ────────────────────────────────────── -->
+        <div class="filter-bar">
+            <!-- Each button filters the visible tasks -->
+            <button class="filter-btn active" onclick="filterTasks('all', this)">All</button>
+            <button class="filter-btn" onclick="filterTasks('pending', this)">Pending</button>
+            <button class="filter-btn" onclick="filterTasks('completed', this)">Completed</button>
+        </div>
+
+        <!-- ── Task List ─────────────────────────────────────────── -->
+        <!-- Tasks will be dynamically inserted here by JavaScript -->
+        <div id="task-list" class="task-list">
+            <!-- Loading state shown while fetching from backend -->
+            <div class="empty-state" id="loading-state">
+                <p>Loading tasks...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── Edit Modal ────────────────────────────────────────────── -->
+    <!-- Hidden popup for editing a task's title -->
+    <div id="edit-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <h3>Edit Task</h3>
+            <input type="text" id="edit-input" class="task-input" placeholder="Edit your task..." />
+            <select id="edit-priority" class="priority-select">
+                <option value="LOW">🟢 Low</option>
+                <option value="MEDIUM">🟡 Medium</option>
+                <option value="HIGH">🔴 High</option>
+            </select>
+            <div class="modal-actions">
+                <button class="add-btn" onclick="saveEdit()">Save</button>
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
