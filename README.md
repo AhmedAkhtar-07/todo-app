@@ -109,7 +109,7 @@ todo-app/
 
 **2. Run the Spring Boot app**
 
-> On Windows use: `mvnw.cmd spring-boot:run`
+./mvnw spring-boot:run
 
 **3. Open in browser**
 
